@@ -179,16 +179,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\AuthorizationAttribute.cs" />
-    <Compile Include="BLL\Authentication.cs" />
+    <Compile Include="BLL\Converters.cs" />
     <Compile Include="BLL\RandomGenerator.cs" />
     <Compile Include="DTOs\EncryptedUser.cs" />
+    <Compile Include="DTOs\Root.cs" />
+    <Compile Include="DTOs\Secret.cs" />
     <Compile Include="Encryption\HashingAndSalting.cs" />
+    <Compile Include="Encryption\Rfc2898Encryption.cs" />
     <Compile Include="Enums\Blocked.cs" />
     <Compile Include="Enums\Privelege.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Interfaces\IAuthentication.cs" />
+    <Compile Include="Interfaces\IConverter.cs" />
     <Compile Include="Interfaces\IHashAndSalting.cs" />
-    <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singletons\SaltsSingleton.cs" />
     <Compile Include="Tokens\JWT.cs" />

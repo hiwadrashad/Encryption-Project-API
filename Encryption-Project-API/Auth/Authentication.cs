@@ -3,19 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Encryption_Project_LIB.BLL
+namespace Encryption_Project_API.Auth
 {
     public class Authentication : IAuthentication
     {
+        public Authentication()
+        {
+
+        }
         public string Login(string USERNAME, string PASSWORD)
         {
             //replace if statement with database check
+
             if (USERNAME == "USERNAME" && PASSWORD == "PASSWORD")
             {
-                return Tokens.JWT.GenerateJWT(new List<Claim>
+                return Encryption_Project_LIB.Tokens.JWT.GenerateJWT(new List<Claim>
                 {
                     new Claim("","")
                 });

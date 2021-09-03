@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace Encryption_Project_LIB.DTOs
 {
-    public class EncryptedUser
+    public class Secret
     {
         [Key]
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Salt { get; set; }
-        public byte[] Hash { get; set; }
-        public Blocked BlockedOrNot { get; set; }
-        public Privelege Priveleges { get; set; }
-        public Role Roles { get; set; }
+        public string Name { get; set; }
+        public string Header { get; set; }
+        public string Body { get; set; }
+        public Privelege PrivelegeLevel { get; set; }
+
     }
 }

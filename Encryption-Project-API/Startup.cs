@@ -1,7 +1,9 @@
+using Encryption_Project_LIB.DTOs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,8 +30,14 @@ namespace Encryption_Project_API
         {
 
             services.AddControllers();
-            services.AddScoped<Encryption_Project_LIB.Interfaces.IAuthentication, Encryption_Project_LIB.BLL.Authentication>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IAuthentication, Encryption_Project_API.Auth.Authentication>();
             services.AddScoped<Encryption_Project_LIB.Interfaces.IHashAndSalting, Encryption_Project_LIB.Encryption.HashingAndSalting>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IConverter, Encryption_Project_LIB.BLL.Converters>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IHashAndSalting, Encryption_Project_LIB.Encryption.HashingAndSalting>();
+            services.AddScoped<Encryption_Project_API.Repositories.IEncryptedUserService, Encryption_Project_API.Repositories.MockingRepository<EncryptedUser>>();
+            services.AddDbContext<Encryption_Project_API.DataBases.EncryptedUsersDatabase>(options =>
+            options.UseSqlServer(
+            Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Encryption_Project_API", Version = "v1" });

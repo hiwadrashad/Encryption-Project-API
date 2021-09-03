@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Encryption_Project_LIB.BLL
 {
-    public class RandomGenerator : Encryption_Project_LIB.Interfaces.IRandomGenerator
+    public class RandomGenerator
     {
-        public string RandomString(int length)
+        public static string RandomString(int length)
         {
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -16,7 +16,7 @@ namespace Encryption_Project_LIB.BLL
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public int RandomNumber(int low, int high)
+        public static int RandomNumber(int low, int high)
         {
             Random random = new Random();
             return random.Next(low, high);

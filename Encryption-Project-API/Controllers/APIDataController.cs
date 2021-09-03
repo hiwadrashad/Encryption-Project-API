@@ -1,4 +1,5 @@
-﻿using Encryption_Project_LIB.Interfaces;
+﻿using Encryption_Project_API.Repositories;
+using Encryption_Project_LIB.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,28 @@ namespace Encryption_Project_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccessDataController : ControllerBase
+    public class APIDataController : ControllerBase
     {
         private IAuthentication _authentication;
-        public AccessDataController(Encryption_Project_LIB.Interfaces.IAuthentication authentication)
+        private IEncryptedUserService _encryptedUserService;
+        public APIDataController(Encryption_Project_LIB.Interfaces.IAuthentication authentication, IEncryptedUserService encryptedUserService)
         {
             _authentication = authentication;
+            _encryptedUserService = encryptedUserService;
         }
   
 
-        [HttpGet]
-        public IActionResult Get(string username, string password)
+        [HttpGet("{username}/{password}")]
+        public IActionResult Login(string username, string password)
         {
             try
             {
-                return Ok(new
-                {
-                    token = _authentication.Login(username, password)
-                });
+                var item = _encryptedUserService.GetAllUsers().FirstOrDefault().Username;
+                return Ok(item);
+                //return Ok(new
+                //{
+                //    token = _authentication.Login(username, password)
+                //});
             }
 #pragma warning disable CS0168 // Variable is declared but never used
             catch (UnauthorizedAccessException ex)
@@ -53,6 +58,7 @@ namespace Encryption_Project_API.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+           
         }
 
         // PUT api/<AccessDataController>/5
