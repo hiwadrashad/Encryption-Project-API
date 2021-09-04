@@ -35,6 +35,39 @@ namespace Encryption_Project_API.Repositories
                 Roles = Encryption_Project_LIB.Enums.Role.Admin,
                 Salt = _converter.ConvertJSON().FirstOrDefault().Salt,
                 Username = "Admin"
+              },
+              new EncryptedUser()
+              {
+                BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked,
+                Hash = _converter.GetString(_hashAndSalting.GetHash(_converter.ConvertJSON().FirstOrDefault().AdminPassword,
+                _converter.ConvertJSON().FirstOrDefault().Salt)),
+                Id  = 2,
+                Priveleges = Encryption_Project_LIB.Enums.Privelege.Statesecret,
+                Roles = Encryption_Project_LIB.Enums.Role.Admin,
+                Salt = _converter.ConvertJSON().FirstOrDefault().Salt,
+                Username = "Admin"
+              },
+              new EncryptedUser()
+              {
+                BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked,
+                Hash = _converter.GetString(_hashAndSalting.GetHash(_converter.ConvertJSON().FirstOrDefault().AdminPassword,
+                _converter.ConvertJSON().FirstOrDefault().Salt)),
+                Id  = 3,
+                Priveleges = Encryption_Project_LIB.Enums.Privelege.Statesecret,
+                Roles = Encryption_Project_LIB.Enums.Role.Admin,
+                Salt = _converter.ConvertJSON().FirstOrDefault().Salt,
+                Username = "Admin"
+              },
+              new EncryptedUser()
+              {
+                BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked,
+                Hash = _converter.GetString(_hashAndSalting.GetHash(_converter.ConvertJSON().FirstOrDefault().AdminPassword,
+                _converter.ConvertJSON().FirstOrDefault().Salt)),
+                Id  = 4,
+                Priveleges = Encryption_Project_LIB.Enums.Privelege.Statesecret,
+                Roles = Encryption_Project_LIB.Enums.Role.Admin,
+                Salt = _converter.ConvertJSON().FirstOrDefault().Salt,
+                Username = "Admin"
               }
            };
 
@@ -55,6 +88,24 @@ namespace Encryption_Project_API.Repositories
                      "Non consectetur a erat nam at lectus. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Suscipit tellus mauris a diam maecenas sed.",
                      Header = "Secret Info",
                      Id = 2,
+                     PrivelegeLevel = Encryption_Project_LIB.Enums.Privelege.Statesecret,
+                     Name = "FirstSecret"
+                },   
+                new Secret
+                {
+                     Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt eget nullam non nisi est sit amet facilisis magna. Nibh nisl condimentum id venenatis a. Lacus suspendisse faucibus interdum posuere lorem ipsum. Mi eget mauris pharetra et. Nullam eget felis eget nunc lobortis mattis. Arcu bibendum at varius vel pharetra vel turpis. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Aliquam sem et tortor consequat id. In nisl nisi scelerisque eu ultrices vitae auctor. Dictum fusce ut placerat orci nulla pellentesque. Imperdiet sed euismod nisi porta lorem mollis. Sed viverra tellus in hac. Tincidunt vitae semper quis lectus nulla at volutpat diam. " +
+                     "Non consectetur a erat nam at lectus. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Suscipit tellus mauris a diam maecenas sed.",
+                     Header = "Secret Info",
+                     Id = 3,
+                     PrivelegeLevel = Encryption_Project_LIB.Enums.Privelege.Statesecret,
+                     Name = "FirstSecret"
+                },
+                new Secret
+                {
+                     Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt eget nullam non nisi est sit amet facilisis magna. Nibh nisl condimentum id venenatis a. Lacus suspendisse faucibus interdum posuere lorem ipsum. Mi eget mauris pharetra et. Nullam eget felis eget nunc lobortis mattis. Arcu bibendum at varius vel pharetra vel turpis. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Aliquam sem et tortor consequat id. In nisl nisi scelerisque eu ultrices vitae auctor. Dictum fusce ut placerat orci nulla pellentesque. Imperdiet sed euismod nisi porta lorem mollis. Sed viverra tellus in hac. Tincidunt vitae semper quis lectus nulla at volutpat diam. " +
+                     "Non consectetur a erat nam at lectus. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Suscipit tellus mauris a diam maecenas sed.",
+                     Header = "Secret Info",
+                     Id = 4,
                      PrivelegeLevel = Encryption_Project_LIB.Enums.Privelege.Statesecret,
                      Name = "FirstSecret"
                 }
