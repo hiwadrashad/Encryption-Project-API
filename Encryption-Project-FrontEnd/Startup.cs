@@ -50,7 +50,7 @@ namespace Encryption_Project_FrontEnd
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Authentication}/{action=Login}/{id?}");
+                    pattern: "{controller=Manipulation}/{action=GetAllUsers}/{id?}");
             });
         }
     }
