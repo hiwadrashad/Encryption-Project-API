@@ -29,7 +29,7 @@ namespace Encryption_Project_LIB.Singletons
 
         public void AssignNewSalt()
         {
-            BLL.RandomGenerator.RandomString(BLL.RandomGenerator.RandomNumber(1,100));
+            SALT = BLL.RandomGenerator.RandomString(BLL.RandomGenerator.RandomNumber(1,100));
         }
 
         public string GetSalt()

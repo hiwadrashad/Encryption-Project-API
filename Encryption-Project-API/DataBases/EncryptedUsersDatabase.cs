@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Encryption_Project_API.DataBases
@@ -26,8 +27,8 @@ namespace Encryption_Project_API.DataBases
             new Encryption_Project_LIB.DTOs.EncryptedUser 
             {
                 BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked, 
-                Hash = _hashAndSalting.GetHash(_converter.ConvertJSON().FirstOrDefault().AdminPassword, 
-                _converter.ConvertJSON().FirstOrDefault().Salt),
+                Hash = _converter.GetString(_hashAndSalting.GetHash(_converter.ConvertJSON().FirstOrDefault().AdminPassword, 
+                _converter.ConvertJSON().FirstOrDefault().Salt)),
                 Id  = 1,
                 Priveleges = Encryption_Project_LIB.Enums.Privelege.Topsecret,
                 Roles = Encryption_Project_LIB.Enums.Role.Admin,

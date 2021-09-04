@@ -9,6 +9,9 @@ namespace Encryption_Project_LIB.Interfaces
 {
     public interface IConverter
     {
-       List<Root> ConvertJSON();
+        List<Root> ConvertJSON();
+        byte[] GetBytes(string str);
+        string GetString(byte[] bytes);
     }
 }
+

@@ -195,6 +195,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singletons\SaltsSingleton.cs" />
     <Compile Include="Tokens\JWT.cs" />
+    <Compile Include="ViewModels\RegisterUserVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

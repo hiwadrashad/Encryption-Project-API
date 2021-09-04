@@ -1,5 +1,7 @@
 ﻿using Encryption_Project_API.Repositories;
+using Encryption_Project_LIB.DTOs;
 using Encryption_Project_LIB.Interfaces;
+using Encryption_Project_LIB.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,19 +18,21 @@ namespace Encryption_Project_API.Controllers
     {
         private IAuthentication _authentication;
         private IEncryptedUserService _encryptedUserService;
-        public APIDataController(Encryption_Project_LIB.Interfaces.IAuthentication authentication, IEncryptedUserService encryptedUserService)
+        private IHashAndSalting _hashAndSalting;
+        public APIDataController(Encryption_Project_LIB.Interfaces.IAuthentication authentication, IEncryptedUserService encryptedUserService, IHashAndSalting hashAndSalting)
         {
             _authentication = authentication;
             _encryptedUserService = encryptedUserService;
+            _hashAndSalting = hashAndSalting;
         }
-  
+
 
         [HttpGet("{username}/{password}")]
         public IActionResult Login(string username, string password)
         {
             try
             {
-                var item = _encryptedUserService.GetAllUsers().FirstOrDefault().Username;
+                var item = _authentication.Login(username, password);
                 return Ok(item);
                 //return Ok(new
                 //{
@@ -48,29 +52,69 @@ namespace Encryption_Project_API.Controllers
         }
 
         // GET api/<AccessDataController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet()]
+        [Route("GetAllUsers")]
+        public IActionResult GetAllUsers()
         {
-            return "value";
+            try
+            {
+                var users = _encryptedUserService.GetAllUsers();
+                return Ok(users);
+            }
+#pragma warning disable CS0168 // Variable is declared but never used
+            catch (UnauthorizedAccessException ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+            {
+                return Problem("Incorrect input", statusCode: 401);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet()]
+        [Route("GetSecret/{id}/{secretname}")]
+        public IActionResult GetSecret(int id,string secretname)
+        {
+            try
+            {
+                var secrets = _encryptedUserService.GetSecrets(secretname, _encryptedUserService.GetAllUsers().Where(a => a.Id == id).FirstOrDefault().Priveleges);
+                return Ok(secrets);
+            }
+#pragma warning disable CS0168 // Variable is declared but never used
+            catch (UnauthorizedAccessException ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+            {
+                return Problem("Incorrect input", statusCode: 401);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<AccessDataController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Register([FromBody] RegisterUserVM VM)
         {
-           
+            _encryptedUserService.Add(VM);
         }
 
         // PUT api/<AccessDataController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Block(int id)
         {
+            _encryptedUserService.Block(_encryptedUserService.GetAllUsers().Where(a => a.Id == id).FirstOrDefault());
         }
 
         // DELETE api/<AccessDataController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut()]
+        [Route("Unblock/{id}")]
+        public void Unblock(int id)
         {
+            _encryptedUserService.Unblock(_encryptedUserService.GetAllUsers().Where(a => a.Id == id).FirstOrDefault());
         }
+
     }
 }
