@@ -1,23 +1,57 @@
 ﻿<style>
-    .main-banner {
-    width: 100vw;
-    transform: translateX(-16vw);
+    @@media screen and (max-width: 1367px) {
+        .main-banner {
+            width: 100vw;
+            transform: translateX(-10vw);
+        }
+
+        .recent-listing {
+            width: 100vw;
+            transform: translateX(-10vw);
+        }
+
+        .main-button {
+            transform: translateX(43vw);
+        }
+
+        .white-space-items {
+            padding-top: 10vw;
+        }
+
+        .fixed-image {
+            width: 30vw !important;
+        }
+
+        .list-account {
+        transform: translateY(-1.5vw);
+        }
     }
 
-    .recent-listing {
-        width: 100vw;
-        transform: translateX(-16vw);
-    }
-    .main-button {
-       transform: translateX(35vw);
-    }
-    .white-space-items {
-     padding-top: 10vw;
+    @@media screen and (min-width: 1367px) {
+        .main-banner {
+            width: 100vw;
+            transform: translateX(-16vw);
+        }
+
+        .recent-listing {
+            width: 100vw;
+            transform: translateX(-16vw);
+        }
+
+        .main-button {
+            transform: translateX(35vw);
+        }
+
+        .white-space-items {
+            padding-top: 10vw;
+        }
+
+        .fixed-image {
+            width: 30vw !important;
+        }
     }
 
-    .fixed-image {
-    width: 30vw !important;
-    }
+   
 </style>
 <html lang="en">
 <head>
@@ -86,7 +120,6 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-
     <div class="main-banner">
         <div class="container">
             <div class="row">
@@ -115,7 +148,7 @@
                 </div>
                 <div class="col-lg-10 offset-lg-1">
                     <ul class="categories">
-                        <li><a href="category.html"><span class="icon"><img src="assets/images/search-icon-01.png" alt="Home"></span> Add new accounts</a></li>
+                        <li class="list-account"><a href="category.html"><span class="icon"><img src="assets/images/search-icon-01.png" alt="Home"></span> Add new accounts</a></li>
                         <li><a href="#"><span class="icon"><img src="assets/images/search-icon-05.png" alt="Travel"></span> Get Security Documents</a></li>
                     </ul>
                 </div>
