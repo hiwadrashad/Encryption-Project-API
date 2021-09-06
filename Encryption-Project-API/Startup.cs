@@ -35,6 +35,7 @@ namespace Encryption_Project_API
             services.AddScoped<Encryption_Project_LIB.Interfaces.IConverter, Encryption_Project_LIB.BLL.Converters>();
             services.AddScoped<Encryption_Project_LIB.Interfaces.IHashAndSalting, Encryption_Project_LIB.Encryption.HashingAndSalting>();
             services.AddScoped<Encryption_Project_API.Repositories.IEncryptedUserService, Encryption_Project_API.Repositories.MockingRepository<EncryptedUser>>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IRfc2898Encryption, Encryption_Project_LIB.Encryption.Rfc2898Encryption>();
             services.AddDbContext<Encryption_Project_API.DataBases.EncryptedUsersDatabase>(options =>
             options.UseSqlServer(
             Configuration.GetConnectionString("DefaultConnection")));

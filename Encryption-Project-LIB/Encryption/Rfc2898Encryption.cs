@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Encryption_Project_LIB.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Encryption_Project_LIB.Encryption
 {
-    public static class Rfc2898Encryption
+    public class Rfc2898Encryption : IRfc2898Encryption
     {
-        public static string Encrypt(string clearText, string EncryptionKey = "abc123")
+        public string Encrypt(string clearText, string EncryptionKey = "abc123")
         {
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
@@ -30,7 +31,7 @@ namespace Encryption_Project_LIB.Encryption
             }
             return clearText;
         }
-        public static string Decrypt(string cipherText, string EncryptionKey = "abc123")
+        public string Decrypt(string cipherText, string EncryptionKey = "abc123")
         {
             cipherText = cipherText.Replace(" ", "+");
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
