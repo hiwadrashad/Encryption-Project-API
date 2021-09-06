@@ -1,3 +1,4 @@
+using Encryption_Project_LIB.DTOs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,11 @@ namespace Encryption_Project_FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IAuthentication, Encryption_Project_API.Auth.Authentication>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IHashAndSalting, Encryption_Project_LIB.Encryption.HashingAndSalting>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IConverter, Encryption_Project_LIB.BLL.Converters>();
+            services.AddScoped<Encryption_Project_LIB.Interfaces.IHashAndSalting, Encryption_Project_LIB.Encryption.HashingAndSalting>();
+            services.AddScoped<Encryption_Project_API.Repositories.IEncryptedUserService, Encryption_Project_API.Repositories.MockingRepository<EncryptedUser>>();
             services.AddControllersWithViews();
         }
 
@@ -50,7 +56,7 @@ namespace Encryption_Project_FrontEnd
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Manipulation}/{action=GetAllUsers}/{id?}");
+                    pattern: "{controller=Authentication}/{action=Login}/{id?}");
             });
         }
     }

@@ -29,19 +29,26 @@ namespace Encryption_Project_API.Repositories
             }
             else
             {
-                var amountofusers = _encryptedUserDatabase.EncryptedUsers.Count();
-                Encryption_Project_LIB.Singletons.SaltsSingleton.GetSaltsSingleton().AssignNewSalt();
-                VM.User.Salt = Encryption_Project_LIB.Singletons.SaltsSingleton.GetSaltsSingleton().GetSalt();
-                VM.User.Hash = _converter.GetString(_hashAndsalting.GetHash(VM.password, VM.User.Salt));
-                _encryptedUserDatabase.EncryptedUsers.Add(VM.User);
-                _encryptedUserDatabase.SaveChanges();
-                if (_encryptedUserDatabase.EncryptedUsers.Count() == amountofusers)
+                if (_encryptedUserDatabase.EncryptedUsers.Any(a => a.Username == VM.User.Username))
                 {
-                    return Result.Failure("User not added");
+                    return Result.Failure("User already exists");
                 }
                 else
                 {
-                    return Result.Success();
+                    var amountofusers = _encryptedUserDatabase.EncryptedUsers.Count();
+                    Encryption_Project_LIB.Singletons.SaltsSingleton.GetSaltsSingleton().AssignNewSalt();
+                    VM.User.Salt = Encryption_Project_LIB.Singletons.SaltsSingleton.GetSaltsSingleton().GetSalt();
+                    VM.User.Hash = _converter.GetString(_hashAndsalting.GetHash(VM.password, VM.User.Salt));
+                    _encryptedUserDatabase.EncryptedUsers.Add(VM.User);
+                    _encryptedUserDatabase.SaveChanges();
+                    if (_encryptedUserDatabase.EncryptedUsers.Count() == amountofusers)
+                    {
+                        return Result.Failure("User not added");
+                    }
+                    else
+                    {
+                        return Result.Success();
+                    }
                 }
             }
         }

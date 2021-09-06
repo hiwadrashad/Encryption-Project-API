@@ -1,24 +1,26 @@
 ﻿<link rel="stylesheet" href="/Login/Layout2.css">
+@model Encryption_Project_LIB.DTOs.LoadingData
 <style>
     .wrapper {
-    height:55vw !important;
-    width: 100vw;
-    transform: translateX(-1vw);
+        height: 55vw !important;
+        width: 100vw;
+        transform: translateX(-1vw);
     }
+
     body {
-    overflow-x: hidden;
+        overflow-x: hidden;
     }
 </style>
 
 <div class="wrapper">
-    <form class="login">
+    <form asp-action="Login" asp-controller="Authentication" class="login">
         <p class="title">Log in</p>
-        <input type="text" placeholder="Username" autofocus />
+        <input asp-for="Username" type="text" placeholder="Username" autofocus />
         <i class="fa fa-user"></i>
-        <input type="password" placeholder="Password" />
+        <input asp-for="Password" type="password" placeholder="Password" />
         <i class="fa fa-key"></i>
         <a href="#">Forgot your password?</a>
-        <button>
+        <button type="submit">
             <i class="spinner"></i>
             <span class="state">Log in</span>
         </button>

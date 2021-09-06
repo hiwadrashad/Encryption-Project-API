@@ -74,6 +74,27 @@ namespace Encryption_Project_API.Controllers
         }
 
         [HttpGet()]
+        [Route("GetAllSecrets")]
+        public IActionResult GetAllSecrets(int id, string secretname)
+        {
+            try
+            {
+                var secrets = _encryptedUserService.GetSecrets(secretname, _encryptedUserService.GetAllUsers().Where(a => a.Id == id).FirstOrDefault().Priveleges);
+                return Ok(secrets);
+            }
+#pragma warning disable CS0168 // Variable is declared but never used
+            catch (UnauthorizedAccessException ex)
+#pragma warning restore CS0168 // Variable is declared but never used
+            {
+                return Problem("Incorrect input", statusCode: 401);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet()]
         [Route("GetSecret/{id}/{secretname}")]
         public IActionResult GetSecret(int id,string secretname)
         {
@@ -102,14 +123,14 @@ namespace Encryption_Project_API.Controllers
         }
 
         // PUT api/<AccessDataController>/5
-        [HttpPut("{id}")]
+        [HttpGet("{id}")]
         public void Block(int id)
         {
             _encryptedUserService.Block(_encryptedUserService.GetAllUsers().Where(a => a.Id == id).FirstOrDefault());
         }
 
         // DELETE api/<AccessDataController>/5
-        [HttpPut()]
+        [HttpGet()]
         [Route("Unblock/{id}")]
         public void Unblock(int id)
         {

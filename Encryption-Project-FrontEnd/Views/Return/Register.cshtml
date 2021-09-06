@@ -1,4 +1,5 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model Encryption_Project_LIB.ViewModels.RegisterUserVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
 <html lang="en">
 <style>
@@ -6,13 +7,13 @@
         background-color: #e6e6e6 !important;
     }
 
-        @@media screen and (max-width: 1367px) {
+        @@media screen and (min-width: 1367px) {
             .main-container {
                 width: 100vw !important;
                 transform: translateX(-20vw);
             }
         }
-    }
+    
 
     @@media screen and (max-width: 1367px) {
         .main-container {
@@ -20,7 +21,7 @@
             transform: translateX(-7vw);
         }
         .sub-container {
-        transform: scale(0.6) !important;
+        transform: scale(0.8) !important;
         }
     }
 </style>
@@ -58,27 +59,21 @@
 
     <div class="container-contact100 main-container">
         <div class="sub-container">
-            <form class="contact100-form  validate-form">
+            <form class="contact100-form  validate-form" asp-action="Register" asp-controller="Return">
                 <span class="contact100-form-title">
                    Fill in user data
                 </span>
 
                 <div class="wrap-input100 validate-input bg1" data-validate="Please Type Name">
                     <span class="label-input100">Username</span>
-                    <input class="input100" type="text" name="name" placeholder="Username">
+                    <input asp-for="User.Username" class="input100" type="text" name="name" placeholder="Username">
                 </div>
 
 
                 <div class="wrap-input100 validate-input bg1" data-validate="Please Type Name">
                     <span class="label-input100">Password</span>
-                    <input class="input100" type="text" name="name" placeholder="Password">
+                    <input asp-for="password" class="input100" type="text" name="name" placeholder="Password">
                 </div>
-
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Name">
-                    <span class="label-input100">Username</span>
-                    <input class="input100" type="text" name="name" placeholder="Username">
-                </div>
-
 
                 <div class="wrap-input100 validate-input bg1" data-validate="Please Type Name">
                     <span class="label-input100">Priveleges</span>
