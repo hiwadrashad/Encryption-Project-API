@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using Encryption_Project_API.Repositories;
+using Encryption_Project_LIB.DTOs;
 using Encryption_Project_LIB.ViewModels;
 using Moq;
 using System;
@@ -38,6 +39,75 @@ namespace Encryption_Project_Unit_Tests.Database
             MOCK.Verify(a => a.GetAllUsers());
 
         }
-
+        [Fact]
+        public void GET_USER_TEST()
+        {
+            EncryptedUser STANDARDRETURN = new EncryptedUser();
+            STANDARDRETURN.Username = "TEST";
+            STANDARDRETURN.Roles = Encryption_Project_LIB.Enums.Role.Regular;
+            STANDARDRETURN.BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked;
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.GetUser(1)).Returns(STANDARDRETURN);
+            MOCK.Object.GetUser(1);
+            MOCK.Verify(a => a.GetUser(1));
+        }
+        [Fact]
+        public void GET_ALL_SECRETS()
+        {
+            List<Secret> STANDARDRETURN = new List<Secret>();
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.GetAllSecrets()).Returns(STANDARDRETURN);
+            MOCK.Object.GetAllSecrets();
+            MOCK.Verify(a => a.GetAllSecrets());
+        }
+        [Fact]
+        public void GET_SECRET()
+        {
+            List<Secret> STANDARDRETURN = new List<Secret>();
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.GetSecrets("FirstSecret", Encryption_Project_LIB.Enums.Privelege.Topsecret)).Returns(STANDARDRETURN);
+            MOCK.Object.GetSecrets("FirstSecret", Encryption_Project_LIB.Enums.Privelege.Topsecret);
+            MOCK.Verify(a => a.GetSecrets("FirstSecret", Encryption_Project_LIB.Enums.Privelege.Topsecret));
+        }
+        [Fact]
+        public void BLOCK_TEST()
+        {
+            Result STANDARDRESULT = new Result();
+            EncryptedUser USERINPUT = new EncryptedUser();
+            USERINPUT.Username = "TEST";
+            USERINPUT.Roles = Encryption_Project_LIB.Enums.Role.Regular;
+            USERINPUT.BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked;
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.Block(USERINPUT)).Returns(STANDARDRESULT);
+            MOCK.Object.Block(USERINPUT);
+            MOCK.Verify(a => a.Block(USERINPUT));
+        }
+        [Fact]
+        public void UNBLOCK_TEST()
+        {
+            Result STANDARDRESULT = new Result();
+            EncryptedUser USERINPUT = new EncryptedUser();
+            USERINPUT.Username = "TEST";
+            USERINPUT.Roles = Encryption_Project_LIB.Enums.Role.Regular;
+            USERINPUT.BlockedOrNot = Encryption_Project_LIB.Enums.Blocked.Notblocked;
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.Unblock(USERINPUT)).Returns(STANDARDRESULT);
+            MOCK.Object.Unblock(USERINPUT);
+            MOCK.Verify(a => a.Unblock(USERINPUT));
+        }
+        [Fact]
+        public void ADD_SECRET()
+        {
+            Result STANDARDRESULT = new Result();
+            Secret USERINPUT = new Secret();
+            USERINPUT.Name = "TEST";
+            USERINPUT.Body = "TEST";
+            USERINPUT.Header = "TEST";
+            USERINPUT.PrivelegeLevel = Encryption_Project_LIB.Enums.Privelege.Statesecret;
+            Mock<IEncryptedUserService> MOCK = new Mock<IEncryptedUserService>();
+            MOCK.Setup(a => a.AddSecret(USERINPUT)).Returns(STANDARDRESULT);
+            MOCK.Object.AddSecret(USERINPUT);
+            MOCK.Verify(a => a.AddSecret(USERINPUT));
+        }
     }
 }
