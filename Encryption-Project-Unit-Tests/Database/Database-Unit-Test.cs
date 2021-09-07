@@ -38,5 +38,6 @@ namespace Encryption_Project_Unit_Tests.Database
             MOCK.Verify(a => a.GetAllUsers());
 
         }
+
     }
 }

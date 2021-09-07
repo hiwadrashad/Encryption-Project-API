@@ -263,5 +263,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Documentation\Azure-Devops.txt" />
+    <Content Include="Documentation\Daily-Update.txt" />
+    <Content Include="Documentation\Pre-Documentation.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
